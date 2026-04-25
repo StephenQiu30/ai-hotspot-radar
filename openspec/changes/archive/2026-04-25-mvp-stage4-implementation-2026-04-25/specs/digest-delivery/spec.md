@@ -1,7 +1,5 @@
-## Purpose
+## MODIFIED Requirements
 
-Define how ranked hotspot events become a daily Chinese digest with preserved evidence context and operationally trackable email delivery.
-## Requirements
 ### Requirement: Generate a daily ranked digest
 The system SHALL generate one AI hotspot digest per day from the ranked hotspot event set and retain references for downstream verification.
 
@@ -49,4 +47,3 @@ The system SHALL isolate upstream or per-event failures so that a single depende
 - **WHEN** digest rendering fails at an unrecoverable level
 - **THEN** the system generates a minimal fallback body and still attempts delivery
 - **AND** records a failed render status when fallback also fails
-
