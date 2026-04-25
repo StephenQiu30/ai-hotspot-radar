@@ -3,13 +3,13 @@ services:
     profiles:
       - app
     build:
-      context: ..
+      context: .
       dockerfile: infra/python/Dockerfile
     working_dir: /workspace
     command: ["uvicorn", "services.api.app:app", "--host", "0.0.0.0", "--port", "8000"]
     env_file:
-      - ./env/.env.example
-      - ./env/.env
+      - ./infra/env/.env.example
+      - ./infra/env/.env
     environment:
       PYTHONPATH: /workspace
     ports:
@@ -19,13 +19,13 @@ services:
     profiles:
       - jobs
     build:
-      context: ..
+      context: .
       dockerfile: infra/python/Dockerfile
     working_dir: /workspace
     command: ["celery", "-A", "services.worker.app:celery_app", "worker", "--loglevel=INFO"]
     env_file:
-      - ./env/.env.example
-      - ./env/.env
+      - ./infra/env/.env.example
+      - ./infra/env/.env
     environment:
       PYTHONPATH: /workspace
     depends_on:
@@ -36,13 +36,13 @@ services:
     profiles:
       - jobs
     build:
-      context: ..
+      context: .
       dockerfile: infra/python/Dockerfile
     working_dir: /workspace
     command: ["celery", "-A", "services.worker.app:celery_app", "beat", "--loglevel=INFO"]
     env_file:
-      - ./env/.env.example
-      - ./env/.env
+      - ./infra/env/.env.example
+      - ./infra/env/.env
     environment:
       PYTHONPATH: /workspace
     depends_on:
@@ -52,12 +52,12 @@ services:
     profiles:
       - app
     build:
-      context: ..
+      context: .
       dockerfile: infra/node/Dockerfile
     depends_on:
       - api
     env_file:
-      - ./env/.env.example
+      - ./infra/env/.env.example
     ports:
       - "3000:3000"
 
